@@ -24,13 +24,10 @@ jobs:
         git config user.email "iam@jamesiv.es"
         git config user.name "James Ives"
 
-    - run: npm config set scope "@JamesIves"
     - run: npm install
     - run: npm run-script build
-    - run: npm version patch -m "Release %s 📣"
-    - run: git push
     - run: npm ci
-    - run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}
+    - run: npm config set scope "@JamesIves"
 
     # Publish to npm
     - run: npm publish --access public
