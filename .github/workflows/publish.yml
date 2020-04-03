@@ -27,6 +27,7 @@ jobs:
     - run: npm install
     - run: npm run-script build
     - run: npm ci
+    - run: npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
     - run: npm config set scope "@JamesIves"
 
     # Publish to npm
