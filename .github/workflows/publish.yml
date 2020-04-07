@@ -23,6 +23,8 @@ jobs:
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
 
+    - run: ls
+
     - name: Configure git
       run: |
         git config user.email "iam@jamesiv.es"
