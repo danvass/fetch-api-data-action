@@ -33,16 +33,17 @@ jobs:
     #   env:
     #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - run: |
-        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
-        npm ci
-      env:
-        NODE_AUTH_TOKEN: ${{ github.token }}
 
     # Setup .npmrc file to publish to GitHub Packages
     - uses: actions/setup-node@v1
       with:
         node-version: 12
+
+    - run: |
+        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
+        npm ci
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
 
     # Publish to GitHub Packages
     - run: npm publish
