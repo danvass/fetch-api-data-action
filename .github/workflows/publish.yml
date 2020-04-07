@@ -19,7 +19,7 @@ jobs:
         node-version: 12
 
     - run: |
-        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
 
