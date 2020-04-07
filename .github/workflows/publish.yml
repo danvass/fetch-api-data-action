@@ -19,7 +19,7 @@ jobs:
         node-version: '13.x'
 
     - run: |
-        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
+        echo "@JamesIves:registry=https://npm.pkg.github.com" > ~/.npmrc
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
 
@@ -48,3 +48,5 @@ jobs:
 
     # Publish to GitHub Packages
     - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
