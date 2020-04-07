@@ -28,10 +28,10 @@ jobs:
     - run: npm run-script build
     - run: npm ci
 
-    # Publish to npm
-    - run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    # # Publish to npm
+    # - run: npm publish
+    #   env:
+    #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - run: |
         echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
