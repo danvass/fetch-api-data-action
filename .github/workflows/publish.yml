@@ -18,6 +18,12 @@ jobs:
       with:
         node-version: 12
 
+    - run: |
+        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+        npm ci
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
+
     - name: Configure git
       run: |
         git config user.email "iam@jamesiv.es"
@@ -38,12 +44,6 @@ jobs:
       with:
         node-version: 12
         scope: '@JamesIves'
-
-    - run: |
-        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
-        npm ci
-      env:
-        NODE_AUTH_TOKEN: ${{ github.token }}
 
     # Publish to GitHub Packages
     - run: npm publish
