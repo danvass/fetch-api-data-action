@@ -20,7 +20,6 @@ jobs:
 
     - run: |
         echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
-        npm ci
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
 
