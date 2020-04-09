@@ -2,22 +2,23 @@ name: publish-to-npm
 on:
   release:
     types: [created]
-  push: 
+  push:
     branches:
       - publish-test
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-node@v1.1.0
+    - uses: actions/checkout@v2
       with:
         ref: dev
 
-    # Setup .npmrc file to publish to npm
-    - uses: actions/setup-node@v1
+    # Setup .npmrc file to publish to GitHub Packages
+    - uses: actions/setup-node@v1.1.0
       with:
         node-version: 12
-        registry-url: 'https://registry.npmjs.org'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@JamesIves'
 
     - name: Configure git
       run: |
@@ -30,12 +31,6 @@ jobs:
     - run: npm ci
 
 
-    # Setup .npmrc file to publish to GitHub Packages
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 12
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@JamesIves'
 
     # Publish to GitHub Packages
     - run: npm publish
