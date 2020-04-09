@@ -33,6 +33,7 @@ jobs:
         node-version: 12
         registry-url: 'https://npm.pkg.github.com'
 
+    - run: npm ci
 
     # Publish to GitHub Packages
     - run: npm publish
