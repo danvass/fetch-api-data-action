@@ -33,5 +33,3 @@ jobs:
 
     # Publish to GitHub Packages
     - run: npm publish --dry-run
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
