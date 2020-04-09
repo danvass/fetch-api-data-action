@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Configure git
-      run: |
-        git config user.email "iam@jamesiv.es"
-        git config user.name "James Ives"
 
     - run: ls -a
 
@@ -22,8 +18,6 @@ jobs:
       with:
         node-version: 12
         registry-url: 'https://npm.pkg.github.com'
-
-    - run: npm ci
 
     # Publish to GitHub Packages
     - run: npm publish
