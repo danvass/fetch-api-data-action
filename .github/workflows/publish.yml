@@ -19,6 +19,11 @@ jobs:
         node-version: 12
         registry-url: 'https://npm.pkg.github.com'
         scope: '@JamesIves'
+  
+    - run: |
+        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
 
     - name: Configure git
       run: |
