@@ -29,7 +29,5 @@ jobs:
     - run: npm ci
     - run: ls -a
 
-
-
     # Publish to GitHub Packages
-    - run: npm publish --dry-run
+    - run: npm publish
