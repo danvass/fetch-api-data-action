@@ -16,6 +16,7 @@ jobs:
         node-version: 12
         registry-url: 'https://npm.pkg.github.com'
         scope: '@JamesIves'
+        always-auth: true
 
     - run: npm init --yes
     - run: ls -a
