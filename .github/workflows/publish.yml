@@ -13,9 +13,6 @@ jobs:
       with:
         ref: dev
 
-  
-    - run: |
-        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
 
@@ -29,6 +26,8 @@ jobs:
     - run: git push
     - run: npm ci
     - run: ls -a
+
+    - run: rm -rf ~/.npmrc
 
       # Setup .npmrc file to publish to GitHub Packages
     - uses: actions/setup-node@v1.1.0
