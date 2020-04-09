@@ -9,22 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: dev
-
-      env:
-        NODE_AUTH_TOKEN: ${{ github.token }}
 
     - name: Configure git
       run: |
         git config user.email "iam@jamesiv.es"
         git config user.name "James Ives"
 
-    - run: npm install
-    - run: npm run-script build
-    - run: git push
-    - run: npm ci
     - run: ls -a
 
       # Setup .npmrc file to publish to GitHub Packages
