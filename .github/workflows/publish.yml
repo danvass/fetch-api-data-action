@@ -1,47 +1,55 @@
-name: Publish to NPMJS and GPR
-
+name: publish-to-npm
 on:
+  release:
+    types: [created]
+
   push:
     branches:
       - publish-test
-
 jobs:
-  publish-to-npm-and-gpr:
+  build:
     runs-on: ubuntu-latest
     steps:
-      
-      # Checkout the repo
-      - uses: actions/checkout@master
-        
-      # Update package version and set up git
-      - uses: actions/setup-node@master
-      - name: Update package version and setup git
-        run: |
-          git config user.name "JamesIves"
-          git config user.email iam@jamesiv.es
-          npm version 1.0.$(date +%s)
-          
-      # Publish to NPMJS
-      - uses: actions/setup-node@master
-        with:
-          node-version: 12
-          registry-url: 'https://registry.npmjs.org/'
-      - name: Publish to NPMJS
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
-          npm config set scope "@JamesIves"
-          npm config list
-        env:
-          CI: true
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+    - uses: actions/checkout@v2
+      with:
+        ref: publish-test
 
-      # Publish to GitHub Package Registry
-      - uses: actions/setup-node@master
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-          scope: '@JamesIves'
-      - name: Publish to GitHub Package Registry
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{github.token}}
+    # Setup .npmrc file to publish to npm
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Configure git
+      run: |
+        git config user.email "iam@jamesiv.es"
+        git config user.name "James Ives"
+
+    - run: npm config set scope "@JamesIves"
+    - run: npm install
+    - run: npm run-script build
+    - run: npm ci
+    - run: npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+
+    # Publish to npm
+    - run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    # Setup .npmrc file to publish to GitHub Packages
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@JamesIves'
+
+    # Publish to GitHub Packages
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: npm config
+   run: |
+     npm config set loglevel error
+     npm config set progress false
+     npm config set registry 'https://npm.pkg.githubs.com’
+     npm config set '@myscope:registry' 'https://www.myscopes-npm.com'
