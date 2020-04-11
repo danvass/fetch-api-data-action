@@ -34,9 +34,9 @@ jobs:
     #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - run: |
-      npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
-      npm config set scope "<@OWNER>"
-      npm config list
+        npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+        npm config set scope "<@OWNER>"
+        npm config list
 
     # Setup .npmrc file to publish to GitHub Packages
     - uses: actions/setup-node@v1
