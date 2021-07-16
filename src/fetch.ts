@@ -71,5 +71,5 @@ export async function generateExport({
     output,
     'utf8'
   )
-  exportVariable('FETCH_API_DATA', output)
+  // exportVariable('FETCH_API_DATA', output)
 }
